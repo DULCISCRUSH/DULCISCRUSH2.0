@@ -1,42 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 const grid = document.querySelector('.grid')
 const scoreDisplay = document.getElementById('score')
-const imageDisplay = document.getElementById('imageDisplay')
 const width = 8
 const squares = []
 let score = 0
 let timeLeft = 180
 
-// Existing score update function
+/// Funcao de score
 const updateScore = (points) => {
   score += points;
   scoreDisplay.innerHTML = score
   
-  console.log(score) // Debugging point
-
-  // Check if the score is a multiple of 1000
-  if (score % 50 === 0) {
-      showRandomImage(); // Call the function to show random image
-  }
+  console.log(score) // Debugging
 }
 
 const candyColors = [
-    'url(images/red-candy.png)',
-    'url(images/yellow-candy.png)',
-    'url(images/orange-candy.png)',
-    'url(images/purple-candy.png)',
-    'url(images/green-candy.png)',
-    'url(images/blue-candy.png)'
+    'url(images/Camafeu.jpg)',
+    'url(images/Broinha-de-coco.jpg)',
+    'url(images/Bem-casado.jpg)',
+    'url(images/Queijadinha.jpg)',
+    'url(images/Ninho.jpg)',
+    'url(images/olho-de-sogra.jpg)'
   ]
 
-  const images = [ // Trivia Trivia Trivia Trivia Trivia Trivia Trivia Trivia 
-    'assets/image1.jpg',
-    'assets/image2.jpg',
-    'assets/image3.jpg',
-    // Add more images as needed
-];
-
-//create your board
+/// Cria o tabuleiro
 function createBoard() {
   for (let i = 0; i < width*width; i++) {
     const square = document.createElement('div')
@@ -50,20 +37,7 @@ function createBoard() {
 }
 createBoard()
 
-// TRIVIA IMAGE GENERATOR 
-function showRandomImage() {
-  const randomIndex = Math.floor(Math.random() * images.length)
-  const img = document.createElement('img')
-  img.src = images[randomIndex]
-  img.alt = 'Random Image'
-  img.style.maxWidth = '100%' // Adjust the width as necessary
-  img.style.height = 'auto' // Maintain aspect ratio
-  img.style.display = 'block'; // Ensures image is treated as a block element
-  imageDisplay.innerHTML = "" // Clear previous image
-  imageDisplay.appendChild(img)
-}
-
-// Dragging the Candy
+/// Segurar o doce
 let colorBeingDragged
 let colorBeingReplaced
 let squareIdBeingDragged
@@ -79,7 +53,6 @@ squares.forEach(square => square.addEventListener('drop', dragDrop))
 function dragStart(){
     colorBeingDragged = this.style.backgroundImage
     squareIdBeingDragged = parseInt(this.id)
-    // this.style.backgroundImage = ''
 }
 
 function dragOver(e) {
@@ -100,9 +73,8 @@ function dragDrop() {
     this.style.backgroundImage = colorBeingDragged
     squares[squareIdBeingDragged].style.backgroundImage = colorBeingReplaced
 }
-
+  // Movimento valido
 function dragEnd() {
-    //What is a valid move?
     let validMoves = [squareIdBeingDragged -1 , squareIdBeingDragged -width, squareIdBeingDragged +1, squareIdBeingDragged +width]
     let validMove = validMoves.includes(squareIdBeingReplaced)
 
@@ -114,7 +86,7 @@ function dragEnd() {
     } else  squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged
 }
 
-//drop candies once some have been cleared
+/// Criacao de doces
 function moveIntoSquareBelow() {
     for (i = 0; i < 55; i ++) {
         if(squares[i + width].style.backgroundImage === '') {
@@ -131,8 +103,8 @@ function moveIntoSquareBelow() {
 }
 
 
-///Checking for Matches
-//for row of Four
+/// Checa os Matches
+// Linha de quatro
   function checkRowForFour() {
     for (i = 0; i < 60; i ++) {
       let rowOfFour = [i, i+1, i+2, i+3]
@@ -152,7 +124,7 @@ function moveIntoSquareBelow() {
   }
   checkRowForFour()
 
-//for column of Four
+// Coluna de quatro
   function checkColumnForFour() {
     for (i = 0; i < 39; i ++) {
       let columnOfFour = [i, i+width, i+width*2, i+width*3]
@@ -169,7 +141,7 @@ function moveIntoSquareBelow() {
   }
 checkColumnForFour()
 
-  //for row of Three
+  // Linha de tres
   function checkRowForThree() {
     for (i = 0; i < 61; i ++) {
       let rowOfThree = [i, i+1, i+2]
@@ -189,7 +161,7 @@ checkColumnForFour()
   }
   checkRowForThree()
 
-//for column of Three
+// Coluna de tres
   function checkColumnForThree() {
     for (i = 0; i < 47; i ++) {
       let columnOfThree = [i, i+width, i+width*2]
@@ -206,23 +178,28 @@ checkColumnForFour()
   }
 checkColumnForThree()
 
-// Checks carried out indefintely - Add Button to clear interval for best practise, or clear on game over/game won. If you have this indefinite check you can get rid of calling the check functions above.
+// Checa as funcoes acima
 window.setInterval(function(){
     checkRowForFour()
+    checkRowForFour()
+    checkColumnForFour()
     checkColumnForFour()
     checkRowForThree()
+    checkRowForThree()
     checkColumnForThree()
+    checkColumnForThree()
+    moveIntoSquareBelow()
     moveIntoSquareBelow()
   }, 100)
 
-///timer timer timer timer timer timer timer timer timer timer timer timer 
+/// Timer
 const timerElement = document.getElementById('timer');
 
 const countdown = () => {
     if (timeLeft <= 0) {
         clearInterval(timerInterval)
         alert("Acabou o Tempo!!!")
-        location.reload(); // Reloads the page
+        location.reload();
     } else {
         timerElement.innerText = timeLeft;
         timeLeft--;
