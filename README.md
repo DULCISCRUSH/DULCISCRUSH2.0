@@ -1,6 +1,6 @@
 # DUCISCRUSH 2.0
 
-O jogo Dulcis Crush desenvolvido para a aula de Educação Patrimonial no curso de História da Universidade Federal de Pelotas (UFPel) visa promover um aprendizado lúdico e interativo sobre a importância do patrimônio cultural. Utilizando mecânicas familiares a jogadores de diversas idades, a proposta é que os alunos explorem e reconheçam elementos históricos e culturais significativos da nossa herança, enquanto se divertem em um ambiente virtual.
+O jogo Dulcis Crush, criado para a aula de Educação Patrimonial no curso de História da Universidade Federal de Pelotas (UFPel) em colaboração com o Museu do Doce de Pelotas, tem como objetivo promover um aprendizado lúdico e interativo acerca da importância do patrimônio cultural. Com mecânicas conhecidas por jogadores de diversas idades, a proposta permite que os alunos explorem e reconheçam elementos históricos e culturais relevantes da nossa herança, enquanto se divertem em um ambiente virtual.
 
 Referências Bibliograficas:
 
